@@ -1,0 +1,9 @@
+FROM flyway/flyway:6.5.1
+
+ENV server=db
+ENV schemas=my_schema
+ENV user=sa
+ENV password=Your_password123
+ENV command=migrate
+
+ENTRYPOINT flyway -url=jdbc:sqlserver://${server} -schemas=${schemas} -user=${user} -password=${password} -connectRetries=60 ${command}

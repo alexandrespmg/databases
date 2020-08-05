@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  flyway:
+    image: flyway/flyway:6.5.1
+    command: -url=jdbc:sqlserver://db; -schemas=my_schema -user=sa -password=Your_password123 -connectRetries=60 migrate
+    volumes:
+      - .:/flyway/sql
+    depends_on:
+      - db
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04"
+    ports:
+      - 1433:1433
+    environment:
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
